@@ -25,3 +25,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+.socials{
+  display:flex;
+  padding-left: 2%;
+}

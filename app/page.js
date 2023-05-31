@@ -1,15 +1,19 @@
-import Head from 'next/head';
 export default function Home() {
   return (
     
     <div>
 
-      <Head>
+      <head>
         <title>Joey Lam</title>
         <link rel="icon" href="/favicon.ico" />
-      </Head>
+      </head>
 
       <main class="background-color:black;">
+        <navbar class="nav">
+          <img src="../HomePage.png"/>
+          <img src="../User.png"/>
+          <img src="../Document.png"/>
+        </navbar>
         <h1>
           Im Joey Lam
         </h1>
@@ -17,7 +21,7 @@ export default function Home() {
           A passionate student from New York Interested in robotics,
           web development, Cybersecurity and machine learning.
         </h3>
-        <div>
+        <div class="socials">
           <img src='../GitHub.png'></img>
           <img src='../Instagram.png'></img>
           <img src='../LinkedIn.png'></img>
