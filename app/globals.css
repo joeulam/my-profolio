@@ -27,5 +27,13 @@ body {
 }
 .socials{
   display:flex;
-  padding-left: 2%;
+}
+.nav{
+  display:flex;
+  justify-content: center;
+  margin-top:5%;
+}
+
+.name{
+  font-size: 34px;
 }
