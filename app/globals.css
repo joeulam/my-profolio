@@ -31,9 +31,16 @@ body {
 .nav{
   display:flex;
   justify-content: center;
-  margin-top:5%;
+  margin-top:10%;
 }
 
 .name{
-  font-size: 34px;
+  margin-top: 20%;
+  font-size: 38px;
+}
+
+.body{
+  margin-left: 20%;
+  margin-right: 20%;
+
 }
