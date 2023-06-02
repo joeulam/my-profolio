@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Tst({ posts }) {
-  return <p>Im currently listening to: &quot;{posts}&quot;</p>;
+  return <p>Im currently listening to: {posts}</p>;
 }
 export default Tst
 
