@@ -1,43 +1,50 @@
 import React from 'react';
 
-function Tst({ posts }) {
-  return <p>Im currently listening to: {posts}</p>;
-}
-export default Tst
-
-export async function getServerSideProps() {
-  // Instead of fetching your `/api` route you can call the same
-  // function directly in `getStaticProps`
+export default async function Tst() {
   const music = await loadspotify();
-  console.log(music)
-
-  // Props returned will be passed to the page component
-  return { 
-    props: { 
-      posts:music,
-    }
-  }
+  //var a = music.entries[1].API
+  return <p>Im currently listening to: {}</p>;
 }
 
-
+const client_id = "70adfcf4e5aa488e9d8d86274ab01561" // Your client id
+const client_secret = "265a505c48184865976f0ada6a90d9a1" // Your secret
 
 export async function loadspotify() {
-  // Call an external API endpoint to get posts
-  const res = await fetch("https://kigiri.githubcurl", {
-      body: "grant_type=client_credentials&client_id=70adfcf4e5aa488e9d8d86274ab01561&client_secret=f9bd6814af3c49b5b1b71cd5642307ea",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      method: "POST"
-    });
-  const data = await res.json();
-  const res2 = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
-      headers: {
-        Authorization: (data.token_type, data.access_token)
-      }
-    })
-   const data2 = await res2.json();
-   console.log(data2)
-  return data2;
+  var tokenjson = await getSpotifyToken()
+  var token = tokenjson.access_token
+  const url = `https://api.spotify.com/v1/me/player/currently-playing`;
+  var response = await fetch(url, {
+    headers: {
+        Authorization:`Bearer ${token}`,
+    },
+});
+console.log(response)
+
 }
 
+
+
+async function getSpotifyToken() {
+  cache: "no-store"
+  const url = 'https://accounts.spotify.com/api/token';
+  var response = await fetch(url, {
+      method: 'POST',
+      headers: {
+          'code':"AQC00ivmsrRMK99qmGaHDX9eRgpRUjWcAago7L7YO_s8_1Gxk8zX8C8koe5AoSkvE_R8CBjqitfe4OGpckBZ2x75-pwWL5w0faZNZLD-so9HhJdxlaalo6hKc2_ksNc4RImtZSwaeqFfppj-aX8pfJjhPMY4GNrJrvR1Y8zvHhG-wL5XZFmy5DDfiU5IjRYVNWqW4LDNx9QJMaMrsDs",
+          'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64')),
+          'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: 'grant_type=client_credentials',
+      // client_credentials or authorization_code// 
+      scope:'user-read-currently-playing',
+      json: true
+  });
+  if (response.ok) {
+      const jsonResponse = await response.json();
+      console.log(jsonResponse);
+      return jsonResponse
+  } else {
+      console.log(response.statusText);
+      throw new Error(`Request failed! Status code: ${response.status} ${response.statusText}`);
+  }
+}
