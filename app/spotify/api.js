@@ -34,7 +34,7 @@ async function getSpotifyToken() {
           'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64')),
           'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: 'grant_type=client_credentials',
+      body: 'grant_type=authorization_code',
       // client_credentials or authorization_code// 
       scope:'user-read-currently-playing',
       json: true
