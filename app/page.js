@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Tst from '../spotify/api';
+import Tst from './spotify/api';
 export default function Home({posts}) {
   return (
     
